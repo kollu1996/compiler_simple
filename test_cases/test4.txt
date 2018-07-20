@@ -1,0 +1,14 @@
+decl
+Int a,b
+Bool f
+enddecl
+
+Int main()
+{
+decl
+Int n,m;
+enddecl
+ begin
+ read(m);
+ end
+}

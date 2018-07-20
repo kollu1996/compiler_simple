@@ -1,0 +1,32 @@
+decl
+Int add(Int a,Int b)
+Int w[5]
+enddecl
+
+Int add(Int a,Int b)
+{
+ decl
+ Int s;
+enddecl
+begin
+s = a+b;
+ret s;
+end
+}
+
+Int main()
+{
+decl
+Int p,q,r,s,t;
+enddecl
+begin
+q=49;
+p=60;
+w[2]=4;
+s=10;
+t=10;
+r=add((add(t,s)),q);
+write(r);
+ret 1;
+end
+}

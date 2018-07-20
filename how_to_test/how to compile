@@ -1,0 +1,6 @@
+cd xsm_expl/
+
+./xsm -e assem.xsm
+cd /home/nikhil/stage8/xsm_expl
+./xsm -e assem.xsm 
+

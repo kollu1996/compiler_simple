@@ -1,0 +1,41 @@
+decl
+Int a,b
+Int factorial(Int x)
+enddecl
+
+
+Int factorial(Int n)
+{
+decl
+		Int f;
+	enddecl
+	begin
+		if(n<=1) then
+			f=1;
+		else
+			f=n*factorial(n-1);
+		endif;
+		ret f;
+	end
+}
+
+
+Int main()
+{
+decl
+Int q,n,res;
+enddecl
+begin
+read(n);
+res=factorial(n);
+write(res);
+ret 1;
+end
+}
+
+
+
+
+
+
+

@@ -1,0 +1,136 @@
+%{
+	#include <stdio.h>
+	#include "y.tab.h"
+	#include <stdlib.h>
+        #include  <string.h>
+        #include  "symbol1.c"
+     char *s;
+      int cou=2048,k=0,inc=0,p;
+   FILE *nikhil1;
+   FILE *nikhil2;
+
+%}
+
+%%
+
+
+
+"MAIN"":"\n  {if(k==0)
+              {
+                 s=strdup(yytext);
+		  p=strlen(s)-2;
+                  s[p]='\0';
+                
+                 translate(cou,s,NULL);
+              }
+         
+             }
+
+
+
+
+"F"[0-9]+":"\n   {
+                   if(k==0) {
+                   s=strdup(yytext);
+                   p=strlen(s)-2;
+                   s[p]='\0';  
+                 
+                   translate(cou,s,NULL);
+                   } 
+                 }
+
+
+
+"L"[0-9]+":"\n { if(k==0)
+               {
+                   s=strdup(yytext);
+                    p=strlen(s)-2;
+                   s[p]='\0'; 
+                  
+                   translate(cou,s,NULL);
+               }
+
+             }
+
+
+
+"L"[0-9]+ {
+                  if(k==1) {
+                     s=strdup(yytext);
+                    
+                    struct labeltrans *hash1; 
+                   hash1=llookup(s);
+                   fprintf(nikhil2,"%d\n",hash1->address);
+                  }
+              }
+
+"F"[0-9]+ {
+                  
+                     if(k==1)
+                     {
+
+                      s=strdup(yytext);
+                  struct labeltrans *hash1; 
+                   hash1=llookup(s);
+                   fprintf(nikhil2," %d\n",hash1->address);
+                    }
+              
+               }
+
+"MAIN" { if(k==1)
+              {
+               
+                 s=strdup(yytext);
+                 
+                                 
+                struct labeltrans *hash1; 
+                   hash1=llookup(s);
+                
+                 fprintf(nikhil2," %d\n",hash1->address);
+                     
+                }
+                  
+                  }
+
+
+
+
+\n {if(k==0) { 
+               if(cou<2056) {
+                             cou=cou+1;
+                            
+                            } 
+              
+                   else{
+                        cou=cou+2;
+                      }
+                }
+    if(k==1)
+                 {
+                      fprintf(nikhil2, "%c",*yytext);
+                  }
+  
+               }
+
+. {if(k==1) {fprintf(nikhil2,"%s",yytext);}}
+
+
+%%
+
+
+int yywrap(void) {
+      k=1;
+	return 1;
+}
+int main(int argc,char *argv[]) {
+     yyin=fopen(argv[1],"r");
+	yylex();
+   if(k==1)
+ {
+   yyin=fopen("assem.xsm","r");
+   nikhil2=fopen("/home/nikhil/Music/stage10/xsm_expl/assem1.xsm","w");
+
+}
+ yylex();
+ return 0;
+}

@@ -1,0 +1,53 @@
+decl
+ Int extendedeuclid(Int a,Int b)
+enddecl
+
+Int extendedeuclid(Int a,Int b)
+{
+ decl
+  Int u,v,w,x,y,z,qi,ri,si,ti;
+ enddecl
+
+ begin
+  u = a;
+  v = b;
+  w = 1;
+  x = 0;
+  y = 0;
+  z = 1;
+
+  while(v != 0) do
+   qi = u/v;
+   ri = u - (qi*v);
+   si = w - (qi*x);
+   ti = y - (qi*z);
+   u = v;
+   v = ri;
+   w = x;
+   x = si;
+   y = z;
+   z = ti;
+  endwhile;
+
+  write(u);
+  write(w);
+  write(y);
+
+  ret 0;
+ end
+}
+
+Int main()
+{
+ decl
+  Int a,b,c;
+  Bool f;
+ enddecl
+
+ begin
+  read(a);
+  read(b);
+ c= extendedeuclid(a,b);
+  ret f;
+ end 
+} 
